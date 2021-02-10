@@ -15,6 +15,7 @@ module SideBar.Styles exposing
     , pipeline
     , pipelineIcon
     , pipelineName
+    , pipelineTextIcon
     , sectionHeader
     , sideBar
     , sideBarHandle
@@ -330,6 +331,19 @@ pipelineIcon asset =
     , style "background-position" "center"
     , style "margin-left" "28px"
     , style "flex-shrink" "0"
+    ]
+
+
+pipelineTextIcon : List (Html.Attribute msg)
+pipelineTextIcon =
+    [ style "height" "18px"
+    , style "width" "18px"
+    , style "margin-left" "28px"
+    , style "flex-shrink" "0"
+    , style "display" "flex"
+    , style "justify-content" "center"
+    , style "align-items" "center"
+    , style "font-size" "16px"
     ]
 
 

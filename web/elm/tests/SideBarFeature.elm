@@ -699,6 +699,12 @@ hasSideBar iAmLookingAtThePage =
                     >> given myBrowserFetchedFavoritedPipelineInstances
                     >> when iAmLookingAtTheTeamInTheFavoritesSection
                     >> then_ iSeeALinkToThePipelineInstance
+            , test "displays instance group if any instances are favorited" <|
+                given iHaveAnOpenSideBar_
+                    >> given myBrowserFetchedAnInstanceGroup
+                    >> given myBrowserFetchedFavoritedPipelineInstances
+                    >> when iAmLookingAtTheTeamInTheFavoritesSection
+                    >> then_ iSeeTheInstanceGroup
             ]
         , test "subscribes to 5-second tick" <|
             given iAmLookingAtThePage
@@ -1916,8 +1922,11 @@ iSeeThePipelineNameBelow =
     Query.children [] >> Query.index 1 >> Query.has [ text "pipeline" ]
 
 
+iSeeTheInstanceGroup =
+    iSeeItIsALinkToTheFirstInstanceGroup
+
 iSeeThePipelineInstance =
-    Query.has [ text "group/version:1" ]
+    Query.has [ text "version:1" ]
 
 
 iSeeNoPipelineNames =
@@ -2066,7 +2075,7 @@ iAmLookingAtThePipelineWithTheSameName =
 
 
 iAmLookingAtTheOtherInstance =
-    Query.find [ tag "a", containing [ text "group/version:2" ] ]
+    Query.find [ tag "a", containing [ text "version:2" ] ]
 
 
 myBrowserNotifiesEveryFiveSeconds =
