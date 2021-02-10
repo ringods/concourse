@@ -1,5 +1,39 @@
 package atc
 
+// // current
+// atc.Plan {
+// 	Task: TaskPlan {
+// 		// custom resource type
+// 		// getvar
+// 	}
+// }
+
+// // a
+// Plan: atc.Plan {
+// 	InParallel: {
+// 		Plan {
+// 			Check: // resource type
+// 		},
+// 		Plan {
+// 			GetVar: // getvar
+// 		},
+// 	},
+// 	Plan {
+// 		Task: // references the Check and GetVar
+// 	}
+// }
+
+// // b
+// atc.PlanContext {
+// 	ResourceTypeConfig:
+// 	VarSourceConfig:
+
+// 	Plan: atc.Plan {
+// 		Task: TaskPlan {
+// 			// ResourceTypeConfig and VarSourceConfig gets passed around and dynamically creates new steps
+// 		}
+// 	}
+// }
 type Plan struct {
 	ID       PlanID `json:"id"`
 	Attempts []int  `json:"attempts,omitempty"`
@@ -188,9 +222,9 @@ type GetPlan struct {
 	Name string `json:"name,omitempty"`
 
 	// The resource config to fetch from.
-	Type                   string                 `json:"type"`
-	Source                 Source                 `json:"source"`
-	VersionedResourceTypes VersionedResourceTypes `json:"resource_types,omitempty"`
+	Type                  string                `json:"type"`
+	Source                Source                `json:"source"`
+	VersionedResourceType VersionedResourceType `json:"resource_types,omitempty"`
 
 	// The version of the resource to fetch. One of these must be specified.
 	Version     *Version `json:"version,omitempty"`
