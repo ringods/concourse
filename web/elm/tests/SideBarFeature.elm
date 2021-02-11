@@ -685,6 +685,12 @@ hasSideBar iAmLookingAtThePage =
                     >> given myBrowserFetchedFavoritedInstanceGroups
                     >> when iAmLookingAtTheFirstInstanceGroupStar
                     >> then_ iSeeFilledStarIcon
+            , test "favorited instance groups are displayed in favorites section" <|
+                given iHaveAnOpenSideBarWithAnInstanceGroup
+                    >> given iClickedThePipelineGroup
+                    >> given myBrowserFetchedFavoritedInstanceGroups
+                    >> when iAmLookingAtTheFavoritesSection
+                    >> then_ iSeeABadge
             ]
         , describe "favorited pipeline instances" <|
             [ test "favorited instances appear in the favorites section" <|
@@ -1777,6 +1783,10 @@ myBrowserFetchedAnInstanceGroup =
                     , Data.pipeline "team" 3
                         |> Data.withName "group"
                         |> Data.withInstanceVars Dict.empty
+                    , Data.pipeline "team" 4
+                        |> Data.withName "group"
+                        |> Data.withInstanceVars (Dict.fromList [ ( "version", JsonString "4" ) ])
+                        |> Data.withArchived True
                     ]
             )
 
@@ -1924,6 +1934,7 @@ iSeeThePipelineNameBelow =
 
 iSeeTheInstanceGroup =
     iSeeItIsALinkToTheFirstInstanceGroup
+
 
 iSeeThePipelineInstance =
     Query.has [ text "version:1" ]
